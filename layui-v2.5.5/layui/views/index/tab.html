@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab切换</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+</head>
+<body>
+<div class="layui-row">
+    <div class="layui-col-md12">
+        <div class="layui-tab layui-tab-brief" lay-allowclose="true" lay-filter="test1">
+            <ul class="layui-tab-title">
+                <li lay-id="11" class="layui-this">网站设置</li>
+                <li lay-id="22">用户管理</li>
+                <li lay-id="33">权限分配</li>
+                <li lay-id="44">商品管理</li>
+                <li lay-id="55">订单管理</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">内容1</div>
+                <div class="layui-tab-item">内容2</div>
+                <div class="layui-tab-item">内容3</div>
+                <div class="layui-tab-item">内容4</div>
+                <div class="layui-tab-item">内容5</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../layui.js"></script>
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+        // var layid = location.hash.replace(/^#test1=/, '');
+        // element.tabChange('test1', layid);
+        // //监听Tab切换，以改变地址hash值
+        // element.on('tab(test1)', function(){
+        //     location.hash = 'test1='+ this.getAttribute('lay-id');
+        // });
+        element.on('tab(test1)',function () {
+            console.log(this.getAttribute('lay-id'))
+        })
+        element.render()
+    });
+</script>
+</body>
+</html>

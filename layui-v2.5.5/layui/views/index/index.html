@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>管理系统首页</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <style>
+        .layadmin-iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body class="layui-layout-body" style="background: #eeeeee;">
+<div class="layui-layout layui-layout-admin">
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <div class="layui-header">
+        <div class="layui-logo">巨推管家</div>
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-shrink-right"></i>
+            </a></li>
+            <li class="layui-nav-item"><a href="javascript:;" id="1" class="nav">
+                <i class="layui-icon layui-icon-set"></i>
+                系统
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-set"></i>
+                供应商
+            </a></li>
+            <li class="layui-nav-item"><a href="javascript:;" id="2" class="nav">
+                <i class="layui-icon layui-icon-set"></i>
+                人员
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-set"></i>
+                客服
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-set"></i>
+                销售
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-set"></i>
+                运营
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-set"></i>
+                代办
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i style="float: left" class="layui-icon layui-icon-set"></i>
+                <span style="float: left">通知</span>
+                <span style="float: left" class="layui-badge">99</span>
+            </a>
+            </li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-set"></i>
+                周期报表
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-set"></i>
+                案例
+            </a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-refresh"></i>
+            </a></li>
+            <li class="layui-nav-item"><a href="">
+                <i class="layui-icon layui-icon-notice"></i>
+            </a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    admin
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">修改信息</a></dd>
+                    <dd><a href="">修改密码</a></dd>
+                    <dd><a href="">清除缓存</a></dd>
+                    <dd><a href="">退出账号</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" id="nav" lay-filter="test">
+
+            </ul>
+        </div>
+    </div>
+    <!-- 内容主体区域 -->
+    <div class="layui-body" id="LAY_app_body">
+        <div class="layadmin-tabsbody-item layui-show">
+            <iframe src="../home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+        </div>
+    </div>
+
+</div>
+<script src="../../layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['element','jquery','form'], function(){
+        var element = layui.element;
+        var $ = layui.jquery;
+        var form = layui.form;
+        $.get('../../data/data2.json',function (res) {
+            $('#nav').html(res);
+            var layFilter = $("#nav").attr('lay-filter');
+            element.render('nav',layFilter)
+        });
+        $('.nav').click(function () {
+            var id = $(this).attr('id');
+            if (id == '1'){
+                $.get('../../data/data2.json',function (res) {
+                    $('#nav').html(res);
+                    var layFilter = $("#nav").attr('lay-filter');
+                    element.render('nav',layFilter)
+                });
+            } else if (id == '2') {
+                $.get('../../data/data1.json',function (res) {
+                    $('#nav').html(res);
+                    var layFilter = $("#nav").attr('lay-filter');
+                    element.render('nav',layFilter)
+                });
+            }
+        });
+
+        $('body').on('click', '*[lay-href]', function(){
+            //执行跳转
+            // console.log($(this).attr('lay-href'));
+            $('.layadmin-iframe').attr('src',$(this).attr('lay-href'))
+        });
+    });
+
+
+</script>
+</body>
+</html>

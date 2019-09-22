@@ -1,0 +1,16 @@
+{
+  "code":"200",
+  "message":"成功",
+  "data":[
+    {
+      "id":1,
+      "parentId":null,
+      "name":"一级分类1"
+
+
+    },
+    {"id":2,"parentId":null,"name":"一级分类2"},
+    {"id":3,"parentId":null,"name":"一级分类3"},
+    {"id":4,"parentId":null,"name":"hahah"}
+  ]
+}

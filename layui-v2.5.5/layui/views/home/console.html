@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+</head>
+<body>
+<div style="padding: 10px;box-sizing: border-box;width: 100%;overflow: hidden;">
+    <!--头部-->
+    <div class="layui-row layui-col-space5">
+        <div class="layui-col-md12">
+
+            <div class="layui-tab " lay-filter="demo" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                    <li class="layui-this" lay-id="11">网站设置</li>
+                    <li lay-id="22">用户管理</li>
+                    <li lay-id="33">权限分配</li>
+                    <li lay-id="44">商品管理</li>
+                    <li lay-id="55">订单管理</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">内容1</div>
+                    <div class="layui-tab-item">内容2</div>
+                    <div class="layui-tab-item">内容3</div>
+                    <div class="layui-tab-item">内容4</div>
+                    <div class="layui-tab-item">内容5</div>
+                </div>
+            </div>
+
+            <div style="float: left">
+                <i class="layui-icon layui-icon-prev"></i>
+                <i class="layui-icon layui-icon-home"></i>
+            </div>
+            <div style="float: right">
+                <i class="layui-icon layui-icon-next"></i>
+                <i class="layui-icon layui-icon-down"></i>
+            </div>
+        </div>
+    </div>
+    <!--内容-->
+    <div class="layui-row layui-col-space10">
+        <!--左边-->
+        <div class="layui-col-md8 layui-row layui-col-space5">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">快捷方式</div>
+                    <div class="layui-card-body">
+                        个人信息
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">消息</div>
+                    <div class="layui-card-body">
+                        待办
+                        0
+                        通知
+                        0
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">数据概览</div>
+                    <div class="layui-card-body">
+                        结合 layui 的栅格系统<br>
+                        轻松实现响应式布局
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--右边-->
+        <div class="layui-col-md4 layui-row layui-col-space5">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">版本信息</div>
+                    <div class="layui-card-body">
+                        <table class="layui-table">
+                            <tbody>
+                            <tr>
+                                <td>当前版本</td>
+                                <td>v1.0</td>
+                            </tr>
+                            <tr>
+                                <td>基础框架</td>
+                                <td>layui-v2.4.5</td>
+                            </tr>
+                            <tr>
+                                <td>主要特色</td>
+                                <td>响应式/极简/清爽</td>
+                            </tr>
+                            <tr>
+                                <td>获得渠道</td>
+                                <td>
+                                    <button type="button" class="layui-btn layui-btn-normal layui-btn-xs">百搭按钮</button>
+                                    <button type="button" class="layui-btn layui-btn-warm layui-btn-xs">暖色按钮</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">转化报告</div>
+                    <div class="layui-card-body">
+                        <div>
+                            <span style="float: left;">10%</span>
+                            <span style="float: right;">转化率（日同比 10% ）</span>
+                        </div>
+                        <div class="layui-progress" style="clear: both;">
+                            <div class="layui-progress-bar" lay-percent="10%"></div>
+                        </div>
+                        <div>
+                            <span style="float: left;">40%</span>
+                            <span style="float: right;">转化率（日同比 40% ）</span>
+                        </div>
+                        <div class="layui-progress" style="clear: both;">
+                            <div class="layui-progress-bar" lay-percent="40%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['element','jquery'], function(){
+        var element = layui.element;
+        var $ = layui.jquery;
+
+
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iconFonts 图标选择器</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+</head>
+<body>
+<i class="layui-icon layui-icon-rate" id="icon"></i>
+<div class="layui-form-item">
+    <label class="layui-form-label">选择图标</label>
+    <div class="layui-input-block">
+        <input type="text" name="icon" id="iconFonts"   value=""   class="layui-input">
+    </div>
+</div>
+<script>
+    layui.config({
+        base: "../../com/"  // 配置你下载的iconFonts文件夹路径
+    }).extend({
+        IconFonts: 'iconFonts',
+    });
+    layui.use(['element','form', 'jquery', 'IconFonts'], function () {
+        var element = layui.element;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var IconFonts = layui.IconFonts;
+
+        //图标选择器
+        IconFonts.render({
+            // 选择器，推荐使用input
+            elem: '#iconFonts', //选择器ID
+            // 数据类型：fontClass/layui_icon，
+            type: 'layui_icon',
+            // 是否开启搜索：true/false
+            search: true,
+            // 是否开启分页
+            page: true,
+            // 每页显示数量，默认12
+            limit: 12,
+            // 点击回调
+            click: function (data) {
+                console.log(data);
+                $('#icon').attr('class','layui-icon '+data.icon)
+            }
+        });
+
+
+
+
+        /**
+         * 默认选选中图标
+         */
+        // IconFonts.checkIcon("iconFonts", "{$info.icon}", "layui_icon");
+    })
+
+</script>
+</body>
+</html>

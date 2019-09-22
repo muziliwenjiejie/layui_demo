@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>水平分类</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+</head>
+<body>
+<div style="padding: 50px;">
+    <div id="test"></div>
+</div>
+<script>
+    layui.config({
+        base: '../../com/horizontalClassify/' //配置 layui 第三方扩展组件存放的基础目录
+    }).extend({
+        horizontalClassify: 'horizontalClassify'
+    }).use(['horizontalClassify'], function(){
+        var horizontalClassify = layui.horizontalClassify;
+
+        // 执行示例
+        horizontalClassify.render({
+            elem: '#test'
+            , title : ['一级分类', '二级分类', '三级分类', '四级分类'] // 自定义水平分类标题
+            , showSearch: true // 分类是否可搜索
+            , url : 'horizontalClassify/list.json' // 获取分类列表接口
+            , delUrl : 'horizontalClassify/del.json' // 删除分类接口
+            , addUrl : 'horizontalClassify/add.json' // 添加分类接口
+            , editUrl : 'horizontalClassify/edit.json' // 编辑分类接口
+        });
+    });
+</script>
+</body>
+</html>

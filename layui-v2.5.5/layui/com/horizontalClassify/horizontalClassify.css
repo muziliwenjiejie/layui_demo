@@ -1,0 +1,34 @@
+/**
+ @ Name：layui.horizontalClassify 水平分类
+ @ Author：gmx@yiynx.cn
+ @ License：MIT 
+ */
+ 
+/* 样式加载完毕的标识 */
+html #layuicss-horizontalClassify{} 
+ 
+/* 组件样式 */ 
+.layui-horizontal-classify{}
+.layui-horizontal-classify-box{display:inline-block;vertical-align:middle;margin-left:-1px;}
+.layui-horizontal-classify-box,.layui-horizontal-classify-header,.layui-horizontal-classify-search{border-width:0;border-style:solid;border-color:#e6e6e6}
+.layui-horizontal-classify-box{position:relative;border-width:1px;width:200px;height:360px;border-radius:2px;background-color:#fff}
+.layui-horizontal-classify-box .layui-form-checkbox{width:100%;margin:0!important}
+.layui-horizontal-classify-header{height:38px;line-height:38px;padding:0 10px;border-bottom-width:1px}
+.layui-horizontal-classify-search{position:relative;padding:10px;border-bottom-width:1px}
+.layui-horizontal-classify-search .layui-input{height:32px;padding-left:30px;font-size:12px}
+.layui-horizontal-classify-search .layui-icon-search{position:absolute;left:20px;top:50%;margin-top:-8px;color:#666}
+.layui-horizontal-classify-active{margin:0 15px}
+.layui-horizontal-classify-active .layui-btn{display:block;margin:0;padding:0 15px;background-color:#5FB878;border-color:#5FB878;color:#fff}
+.layui-horizontal-classify-active .layui-btn-disabled{background-color:#FBFBFB;border-color:#e6e6e6;color:#C9C9C9}
+.layui-horizontal-classify-active .layui-btn:first-child{margin-bottom:15px}
+.layui-horizontal-classify-active .layui-btn .layui-icon{margin:0;font-size:14px!important}
+.layui-horizontal-classify-data{padding:0;overflow:auto; height:321px}
+.layui-horizontal-classify-data li{height:32px;line-height:32px;padding:0 10px; border-bottom:1px dashed #ccc;}
+.layui-horizontal-classify-data li:last-of-type {border-bottom:0 !important}
+.layui-horizontal-classify-data li span{cursor:pointer}
+.layui-horizontal-classify-data .layui-horizontal-classify-data-item{display:inline-block;vertical-align:-2px;width:115px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.layui-horizontal-classify-data .hc-edit{float:right; margin:5px 2px;}
+.layui-horizontal-classify-data .hc-delete {float:right; margin:5px 2px;}
+.layui-horizontal-classify-data .hcdi-active{background-color:#f2f2f2;transition:.5s all}
+.layui-horizontal-classify-data .layui-none{padding:15px 10px;text-align:center;color:#999}
+.hc-add{float:right;margin-top:8px;}

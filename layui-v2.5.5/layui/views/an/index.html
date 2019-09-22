@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>案例首页</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+</head>
+<body>
+<div class="layui-row">
+    <div class="layui-col-xs12 layui-card">
+        <div class="layui-card-header">
+            <button type="button" class="layui-btn layui-btn-normal layui-btn-xs">
+                <i class="layui-icon layui-icon-add-circle"></i>
+                百搭按钮
+            </button>
+        </div>
+        <div class="layui-card-body">
+            <table class="layui-hide" id="test" lay-filter="test1"></table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="xiang">详情</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        var $ = layui.jquery;
+        $.ajax({
+            url:'./data/data.json',
+            type:'get',
+            success:function (data) {
+                // console.log(data.data)
+                table.render({
+                    elem: '#test'
+                    ,data:data.data
+                    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                    ,cols: [[
+                        {field:'id', title: 'ID', sort: true, width:60,height:80}
+                        ,{field:'brand', title: '商标'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                        ,{field:'commpany', title: '公司'}
+                        ,{field:'brand_logo',  width:160,height:80,title: 'LOGO',templet: '<div><img src="https://guanjia.jutui.org{{d.brand_logo}}" alt=""></div>'}
+                        ,{field:'content', title: '内容'}
+                        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
+                    ]]
+                });
+            }
+        })
+
+        function string(data){
+            // console.log(typeof (data))
+            // console.log(data.id)
+            let str = ''
+            $.each(data,function (index, item) {
+                // console.log(index+'----'+item)
+                str += index+'='+item+'&'
+            })
+            str = encodeURIComponent(str.slice(0,-1))
+
+            return str
+            // console.log(str);
+        }
+        //监听行工具事件
+        table.on('tool(test1)', function(obj){
+            var data = obj.data;
+            // console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'xiang') {
+                // console.log(obj.data)
+                let str = string(obj.data)
+                location.href = './xiang.html?'+str
+
+            } else if(obj.event === 'edit'){
+                let str = string(obj.data)
+                // console.log(str);
+                let http = './guodu.html?'+str
+                layer.open({
+                    type: 2,
+                    title: '修改案例',
+                    shadeClose: true,
+                    shade: false,
+                    maxmin: true, //开启最大化最小化按钮
+                    area: ['893px', '600px'],
+                    content: http
+                });
+            }
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

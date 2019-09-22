@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>easyCropper 裁剪组件</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+</head>
+<body>
+<div class="layui-form-item">
+    <label class="layui-form-label"><i style="color: red">*</i>产品图片:</label>
+    <input type="hidden" name="productImg" id="productImg"/>
+    <div class="layui-upload">
+        <button type="button" class="layui-btn" id="productImgButton">上传</button>
+        <div class="layui-upload-list">
+            <img class="layui-upload-img" id="productImgImg">
+        </div>
+    </div>
+</div>
+<script>
+    layui.config({
+        base: '../../../layui/easyCropper/' //layui自定义layui组件目录
+    })
+    layui.use(['easyCropper'], function(){
+
+        var easyCropper = layui.easyCropper;
+        //创建一个图片裁剪上传组件
+        var productImgCropper = easyCropper.render({
+            elem: '#productImgButton'
+            ,saveW:280     //保存宽度
+            ,saveH:160     //保存高度
+            ,mark:7/4   //选取比例
+            ,area:'900px'  //弹窗宽度
+            ,url: 'upload'  //图片上传接口返回和（layui 的upload 模块）返回的JOSN一样
+            ,done: function(url){ //上传完毕回调
+                $("#productImg").val(url);
+                $("#productImgImg").attr('src',url);
+            }
+        });
+    })
+</script>
+</body>
+</html>

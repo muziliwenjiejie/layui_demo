@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色管理</title>
+    <link rel="stylesheet" href="../../../css/layui.css">
+</head>
+<body>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<div class="layui-row">
+    <div class="layui-col-xs12">
+        <table class="layui-hide" id="test" lay-filter="test"></table>
+    </div>
+</div>
+</body>
+<script src="../../../layui.js"></script>
+<script>
+    layui.use(['table','element'],function () {
+        var element = layui.element
+        var table = layui.table
+        var $ = layui.jquery
+        $.ajax({
+            url:'https://guanjia.jutui.org/api/cases/cases_all?id=1',
+            type:'get',
+            success:function (data) {
+                // console.log(JSON.parse(data).data)
+                table.render({
+                    elem:'#test',
+                    data:JSON.parse(data).data,
+                    cols:[[
+                        {checkbox:true},
+                        {field:'id',title:'ID',sort:true},
+                        {field:'brand',title:'商标',LAY_CHECKED:true},
+                        {field:'commpany',title:'公司',edit:'text'},
+                        {field:'brand_logo',title:'LOGO',},
+                        {field:'content',title:'描述',},
+                        {field:'trade',title:'成绩',sort:true},
+                        {field:'industry_cate',title:'页数'},
+                        {field:'effect',title:'ID内容'},
+                        {fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                    ]],
+                    page: true,
+                    // limit:2,
+                    // limits:[2,4,6,8,10,12,14,16,18,20],
+                    // toolbar: 'default',
+                    loading:true,
+                    toolbar: '#toolbarDemo',//开启头部工具栏，并为其绑定左侧模板
+
+
+                })
+            }
+        })
+        //头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            };
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.email
+                }, function(value, index){
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+
+    })
+</script>
+</html>

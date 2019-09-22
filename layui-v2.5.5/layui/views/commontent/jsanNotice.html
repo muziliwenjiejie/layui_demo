@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsanNotice 消息推送窗口组件</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+</head>
+<body>
+    <div id="noticeMarker"></div>
+</body>
+<script>
+    layui.config({
+        base: "../../com/jsan-notice/mods/"
+    }).use("mods", function (mods) {
+        //初始化消息组件
+        mods(["layer", "jsanNotice"], function (layer) {
+            const notice = layer.noticeMarker({
+                "elem": "#noticeMarker",
+                "positionX": "left",
+                "positionY": "100px",
+                "lowKey": true,
+                "noticeWindow": {
+                    "type": 1,
+                    "title": "消息",
+                    "classType": {"notice": "通知", "alerted": "预警", "other": "其他"},
+                    "width": "300px",
+                    "height": "720px",
+                    "contentWidth": "80%",
+                    "contentHeight": "65%"
+                }
+            });
+            notice.remind({
+                "lowKey": false
+            });
+            notice.addNews({
+                "lowKey": true,
+                "classTypeId": "notice",
+                "content": [{"title": "【通知】一条来自测试的消息消息消息消息消息消息消息消息消息", "content": "一条来自测试的消息，最多20字，最多20字，最多20字，最多20字，最多20字，最多20字", "date": "2019-07-28 19:30:36", "url": "https://www.baidu.com"},
+                    {"title": "【通知】一条来自测试的消息消息消息消息消息消息消息消息消息", "content": "一条来自测试的消息，最多20字，最多20字，最多20字，最多20字，最多20字，最多20字", "date": "2019-07-28 19:30:36", "url": "https://www.baidu.com"},
+                    {"title": "【通知】一条来自测试的消息消息消息消息消息消息消息消息消息", "content": "一条来自测试的消息，最多20字，最多20字，最多20字，最多20字，最多20字，最多20字", "date": "2019-07-28 19:30:36", "url": "https://www.baidu.com"},
+                    {"title": "【通知】一条来自测试的消息消息消息消息消息消息消息消息消息", "content": "一条来自测试的消息，最多20字，最多20字，最多20字，最多20字，最多20字，最多20字", "date": "2019-07-28 19:30:36", "url": "https://www.baidu.com"}
+                ]
+            });
+        });
+    });
+</script>
+</html>

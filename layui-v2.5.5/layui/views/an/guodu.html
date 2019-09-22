@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+    <script src="../../com/city-picker/city-picker.data.js"></script>
+    <link href="../../com/city-picker/city-picker.css" rel="stylesheet" />
+</head>
+<body>
+<div class="layui-row" style="padding: 10px;">
+    <div class="layui-col-xs12">
+        <form lay-filter="formTest" class="layui-form" action="">
+            <div class="layui-form-item layui-col-space10">
+                <label class="layui-form-label">品牌名称</label>
+                <div class="layui-input-block">
+                    <input type="text" value="hahah" name="brand" lay-verify="title" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">公司名称</label>
+                <div class="layui-input-block">
+                    <input type="text" value="哈哈哈" name="commpany" lay-verify="title" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属城市</label>
+                <div class="layui-input-block">
+                    <input type="text" autocomplete="on" class="layui-input" id="city-picker2" name="city-picker2" readonly="readonly" data-toggle="city-picker">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">公司简介</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">品牌LOGO</label>
+                <div class="layui-input-block">
+                    <!--<div class="layui-row">-->
+                        <div class="layui-col-md11">
+                            <input type="text" class="layui-input" name="brand_logo">
+                        </div>
+                        <div class="layui-col-md1">
+                            <button type="button" class="layui-btn" id="test1">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
+                        </div>
+                    <!--</div>-->
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">服务类型</label>
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="types">
+                        <option value=""></option>
+                        <option value="0">写作</option>
+                        <option value="1" selected="">阅读</option>
+                        <option value="2">游戏</option>
+                        <option value="3">音乐</option>
+                        <option value="4">旅行</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">合作时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="date" id="date1" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">结束时间</label>
+                    <div class="layui-input-block">
+                            <input type="text" name="date1" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注说明</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="无" class="layui-textarea" name="effect"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo2">修改案例</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<script>
+    layui.config({
+        base: 'com/city-picker/' //静态资源所在路径
+    }).extend({
+        citypicker: 'city-picker' // {/}的意思即代表采用自有路径，即不跟随 base 路径
+    }).use(['form', 'layedit', 'laydate', 'upload','citypicker','upload'], function(){
+        var form = layui.form
+            , layer = layui.layer
+            , $ = layui.jquery
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , cityPicker = layui.citypicker
+            , upload = layui.upload;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+            ,ready: function(date){
+            console.log(date); //得到初始的日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+        }
+        });
+        laydate.render({
+            elem: '#date1'
+            ,ready: function(date){
+                console.log(date); //得到初始的日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+            }
+        });
+
+        var currentPicker = new cityPicker("#city-picker2", {
+            provincename: "provincenameid2",
+            cityname: "citynameid2",
+            districtname: "districtnameid2"
+        });
+        currentPicker.setValue("河南省/信阳市/新县");
+
+
+        // 上传-执行实例
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            ,url: './data/upload.json' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+                // console.log(res);
+                // console.log('111');
+                $('input[name=brand_logo]').val(res.data)
+            }
+            ,error: function(err){
+                //请求异常回调
+                // console.log(err);
+                console.log('错误');
+            }
+        });
+        // console.log(uploadInst);
+        function GetRequest() {
+            var url = decodeURIComponent(location.search); //获取url中"?"符后的字串
+            // console.log(url);
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+        let data = GetRequest()
+        // console.log(data);
+        //给表单赋值
+        form.val("formTest", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+            "brand": data.brand // "name": "value"
+            ,"commpany": data.commpany
+            ,"brand_logo": data.brand_logo
+            ,"content": data.content
+            ,"effect": data.effect
+            ,"date": data.date
+            ,'date1': data.date1
+        });
+
+        //获取表单区域所有值
+        var data1 = form.val("formTest");
+        console.log(data1);
+        // $('input[name=brand]').val(data.brand)
+        // $('input[name=commpany]').val(data.commpany)
+        // $('input[name=brand_logo]').val(data.brand_logo)
+        //
+        $('textarea[name=content]').val(data.content)
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor',{
+            tool: ['strong' //加粗
+                ,'italic' //斜体
+                ,'underline' //下划线
+                ,'del' //删除线
+                ,'|' //分割线
+                ,'left' //左对齐
+                ,'center' //居中对齐
+                ,'right' //右对齐
+                ,'link' //超链接
+                ,'unlink' //清除链接
+                ,'face' //表情
+                ,'image' //插入图片
+                ,'help' //帮助
+            ]
+        });
+        // $('textarea[name=effect]').val(data.effect)
+    })
+</script>
+</body>
+</html>

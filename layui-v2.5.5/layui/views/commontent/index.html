@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+</head>
+<body>
+    <span class="timeago" id="time" datetime="2016-06-30 09:20:00"></span>
+    <span class="timeago" datetime="2019-9-1 23:11:11"></span>
+</body>
+<script>
+    layui.config({
+        version: true,
+        base:  '../../lay/modules/'
+    }).extend({
+        timeago: 'timeago'
+    }).use(['element','timeago'],function () {
+        var $ = layui.jquery;
+
+        // 日期
+        let nowTime = new Date()
+        let y = nowTime.getFullYear()
+        let m = nowTime.getMonth()+1
+        let d = nowTime.getDate()
+        let h = nowTime.getHours()
+        let mi = nowTime.getMinutes()
+        let s = nowTime.getSeconds()
+        console.log(y+'-'+m+'-'+d+' '+h+':'+mi+':'+s )
+        //
+        // console.log($('#time').attr('datetime'));
+        $('#time').attr('datetime',y+'-'+m+'-'+d+' '+h+':'+mi+':'+s )
+
+
+        // 渲染
+        var timeago = layui.timeago;
+        timeago.render($('.timeago'));
+    })
+</script>
+</html>

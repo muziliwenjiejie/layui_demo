@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页面</title>
+    <link rel="stylesheet" href="../../css/layui.css">
+    <script src="../../layui.js"></script>
+</head>
+<body>
+
+<ul>
+</ul>
+</body>
+<script>
+    function GetRequest() {
+        var url = decodeURIComponent(location.search); //获取url中"?"符后的字串
+        // console.log(url);
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+    layui.use('table', function() {
+        var $ = layui.jquery;
+        let data = GetRequest()
+        let str = ''
+        // console.log(data);
+        $.each(data, function (index, item) {
+            // console.log(index + '----' + item)
+            str += '<li><span style="color:red;">'+index+'</span><span>'+item+'</span></li><br>'
+
+        })
+        $('ul').append(str)
+    })
+</script>
+</html>
